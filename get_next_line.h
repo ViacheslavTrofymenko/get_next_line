@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtrofyme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: viacheslav <viacheslav@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 10:53:01 by vtrofyme          #+#    #+#             */
-/*   Updated: 2025/04/30 10:53:07 by vtrofyme         ###   ########.fr       */
+/*   Updated: 2025/05/05 18:18:45 by viacheslav       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_list
 }	t_list;
 
 char	*get_next_line (int fd);
+char	*ft_strchr(const char *s, int c);
 
 
 # endif
