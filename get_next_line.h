@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
+#  define BUFFER_SIZE 42
 # endif
 
 # include <unistd.h>
@@ -26,8 +26,11 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-char	*get_next_line (int fd);
-char	*ft_strchr(const char *s, int c);
+char	*get_next_line(int fd);
+t_list	*find_last_node(t_list *str_list);
+void	free_list(t_list **str_list, t_list *clean_node, char *buff);
+int		len_to_newline(t_list *str_list);
+int		found_newline(t_list *str_list);
+void	clean_str_list(t_list **str_list);
 
-
-# endif
+#endif
