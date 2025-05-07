@@ -23,22 +23,16 @@ char	*ft_read_to_left_str(int fd, char *left_str)
 	if (!buff)
 		return (NULL);
 	bytes_read = 1;
-	while (!ft_strchr(left_str, '\n') && bytes_read > 0)
+	while (!ft_strchr(left_str, '\n') && bytes_read != 0)
 	{
 		bytes_read = read(fd, buff, BUFFER_SIZE);
 		if (bytes_read == -1)
 		{
 			free(buff);
-			free(left_str);
 			return (NULL);
 		}
 		buff[bytes_read] = '\0';
 		left_str = ft_strjoin(left_str, buff);
-		if (!left_str)
-		{
-			free(buff);
-			free(left_str);
-		}
 	}
 	free(buff);
 	return (left_str);
@@ -46,19 +40,25 @@ char	*ft_read_to_left_str(int fd, char *left_str)
 
 char	*get_next_line(int fd)
 {
-	static char	*left_str;
+	static char	*left_str;aaaaaaaaaa
+bbbbbbbbbb
+cccccccccc
+dddddddddd
+
 	char		*next_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	left_str = ft_read_to_left_str(fd, left_str);
 	if (!left_str)
+	{
 		return (NULL);
+	}
 	next_line = ft_get_line(left_str);
 	left_str = ft_new_left_str(left_str);
 	return (next_line);
 }
-/*
+
 int	main()
 {
 	int		fd = open("file.txt", O_RDONLY);
@@ -72,4 +72,3 @@ int	main()
 	close(fd);
 	return (0);
 }
-*/

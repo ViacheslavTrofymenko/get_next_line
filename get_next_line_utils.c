@@ -39,32 +39,31 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *left_str, char *buff)
 {
-	char	*str;
-	size_t	total_len;
-	size_t	s1_len;
 	size_t	i;
+	size_t	j;
+	char	*str;
 
-	i = 0;
-	if (!s1)
-		s1 = "";
-	if (!s2)
-		return (NULL);
-	s1_len = ft_strlen(s1);
-	total_len = s1_len + ft_strlen(s2);
-	str = (char *)malloc((total_len + 1) * sizeof(char));
-	if (str == NULL)
-		return (NULL);
-	while (i < total_len)
+	if (!left_str)
 	{
-		if (i < s1_len)
-			str[i] = s1[i];
-		else
-			str[i] = s2[i - s1_len];
-		i++;
+		left_str = (char *)malloc(1 * sizeof(char));
+		left_str[0] = '\0';
 	}
-	str[i] = '\0';
+	if (!left_str || !buff)
+		return (NULL);
+	str = malloc(sizeof(char) * ((ft_strlen(left_str) + ft_strlen(buff)) + 1));
+	if (!str)
+		return (NULL);
+	i = -1;
+	j = 0;
+	if (left_str)
+		while (left_str[++i] != '\0')
+			str[i] = left_str[i];
+	while (buff[j] != '\0')
+		str[i++] = buff[j++];
+	str[ft_strlen(left_str) + ft_strlen(buff)] = '\0';
+	free(left_str);
 	return (str);
 }
 
@@ -104,12 +103,12 @@ char	*ft_new_left_str(char *left_str)
 	i = 0;
 	while (left_str[i] && left_str[i] != '\n')
 		i++;
-	if (!left_str[i])
+	if (left_str[i] == '\0')
 	{
 		free(left_str);
 		return (NULL);
 	}
-	str = (char *)malloc((ft_strlen(left_str) - i + 1) * sizeof(char));
+	str = malloc((ft_strlen(left_str) - i + 1));
 	if (!str)
 		return (NULL);
 	i++;
