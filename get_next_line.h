@@ -22,7 +22,7 @@
 
 typedef struct s_list
 {
-	char			*str_buf;
+	char			*str_buff;
 	struct s_list	*next;
 }	t_list;
 
