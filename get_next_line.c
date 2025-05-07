@@ -11,28 +11,34 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-// #include <fcntl.h>
-// #include <stdio.h>
+#include <fcntl.h>
+#include <stdio.h>
 
 char	*ft_read_to_left_str(int fd, char *left_str)
 {
 	char	*buff;
-	int		read_bytes;
+	ssize_t	bytes_read;
 
 	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buff)
 		return (NULL);
-	read_bytes = 1;
-	while (!ft_strchr(left_str, '\n') && read_bytes != 0)
+	bytes_read = 1;
+	while (!ft_strchr(left_str, '\n') && bytes_read > 0)
 	{
-		read_bytes = read(fd, buff, BUFFER_SIZE);
-		if (read_bytes == -1)
+		bytes_read = read(fd, buff, BUFFER_SIZE);
+		if (bytes_read == -1)
 		{
 			free(buff);
+			free(left_str);
 			return (NULL);
 		}
-		buff[read_bytes] = '\0';
+		buff[bytes_read] = '\0';
 		left_str = ft_strjoin(left_str, buff);
+		if (!left_str)
+		{
+			free(buff);
+			free(left_str);
+		}
 	}
 	free(buff);
 	return (left_str);
@@ -52,17 +58,18 @@ char	*get_next_line(int fd)
 	left_str = ft_new_left_str(left_str);
 	return (next_line);
 }
+/*
+int	main()
+{
+	int		fd = open("file.txt", O_RDONLY);
+	char	*line;
 
-// int	main()
-// {
-// 	int fd = open("file.txt", O_RDONLY);
-// 	char *line;
-
-// 	while ((line = get_next_line(fd)) != NULL)
-// 	{
-// 		printf("%s", line);
-// 		free(line);
-// 	}
-// 	close(fd);
-// 	return (0);
-// }
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		printf("BUFF => %s\n", line);
+		free(line);
+	}
+	close(fd);
+	return (0);
+}
+*/
