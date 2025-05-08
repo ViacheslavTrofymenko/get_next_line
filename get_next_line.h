@@ -17,18 +17,14 @@
 #  define BUFFER_SIZE 42
 # endif
 
-# ifndef MAX_FD
-#  define MAX_FD 1024
-# endif
-
 # include <unistd.h>
 # include <stdlib.h>
 
+size_t	ft_strlen(char *str);
+char	*ft_strchr(char *s, int c);
+char	*ft_strjoin(char *s1, char *s2);
 char	*get_next_line(int fd);
-char	*ft_read_to_left_str(int fd, char *left_str);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin(char *left_str, char *buff);
-char	*ft_get_line(char *left_str);
-char	*ft_new_left_str(char *left_str);
+void	*ft_calloc(size_t count, size_t size);
+void	*ft_memset(void *b, int c, size_t len);
 
 #endif
