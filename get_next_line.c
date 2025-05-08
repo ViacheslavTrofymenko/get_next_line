@@ -27,12 +27,15 @@ char	*ft_read_to_left_str(int fd, char *left_str)
 	{
 		bytes_read = read(fd, buff, BUFFER_SIZE);
 		if (bytes_read == -1)
-		{
-			free(buff);
-			free(left_str);
-			return (NULL);
-		}
+			return (free(buff), free(left_str), NULL);
+		if (bytes_read == 0)
+			return (free(buff), left_str);
 		buff[bytes_read] = '\0';
+		if (!left_str)
+		{
+			left_str = (char *)malloc(1);
+			left_str[0] = '\0';
+		}
 		left_str = ft_strjoin(left_str, buff);
 	}
 	free(buff);
@@ -55,10 +58,10 @@ char	*get_next_line(int fd)
 	left_str = ft_new_left_str(left_str);
 	return (next_line);
 }
-/*
+
 int	main()
 {
-	int		fd = open("file.txt", O_RDONLY);
+	int		fd = open("empty.txt", O_RDONLY);
 	char	*line;
 
 	while ((line = get_next_line(fd)) != NULL)
@@ -69,4 +72,3 @@ int	main()
 	close(fd);
 	return (0);
 }
-*/

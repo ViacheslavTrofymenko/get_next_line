@@ -45,16 +45,10 @@ char	*ft_strjoin(char *left_str, char *buff)
 	size_t	j;
 	char	*str;
 
-	if (!left_str)
-	{
-		left_str = (char *)malloc(1 * sizeof(char));
-		left_str[0] = '\0';
-	}
 	if (!left_str || !buff)
 		return (NULL);
 	str = malloc(sizeof(char) * ((ft_strlen(left_str) + ft_strlen(buff)) + 1));
 	if (!str)
-		return (NULL);
 	i = -1;
 	j = 0;
 	if (left_str)
