@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viacheslav <viacheslav@student.42.fr>      +#+  +:+       +#+        */
+/*   By: vtrofyme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/30 10:51:39 by vtrofyme          #+#    #+#             */
-/*   Updated: 2025/05/06 16:19:51 by vtrofyme       ###   ########.fr       */
+/*   Created: 2025/05/08 15:00:45 by vtrofyme          #+#    #+#             */
+/*   Updated: 2025/05/08 15:00:48 by vtrofyme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,35 @@ char	*get_next_line(int fd)
 	left_str = ft_new_left_str(left_str);
 	return (next_line);
 }
-/*
+
 int	main()
 {
-	int		fd = open("file.txt", O_RDONLY);
 	char	*line;
+	int		i;
+	int		fd1;
+	int		fd2;
+	int		fd3;
 
-	while ((line = get_next_line(fd)) != NULL)
+	fd1 = open("tests/test.txt", O_RDONLY);
+	fd2 = open("tests/test2.txt", O_RDONLY);
+	fd3 = open("tests/test3.txt", O_RDONLY);
+	i = 1;
+	while (i < 7)
 	{
-		printf("%s", line);
+		line = get_next_line(fd1);
+		printf("line [%02d]: %s", i, line);
 		free(line);
+		line = get_next_line(fd2);
+		printf("line [%02d]: %s", i, line);
+		free(line);
+		line = get_next_line(fd3);
+		printf("line [%02d]: %s", i, line);
+		free(line);
+		i++;
 	}
-	close(fd);
+	close(fd1);
+	close(fd2);
+	close(fd3);
 	return (0);
 }
-*/
+
