@@ -20,20 +20,16 @@ void	add_to_str_list(t_list **str_list, char *buff)
 	t_list	*last_node;
 
 	last_node = find_last_node(*str_list);
-	new_node = (t_list *)malloc(sizeof(t_list));
+	new_node = malloc(sizeof(t_list));
 	if (!new_node)
 		return ;
-	new_node->str_buff = buff;
-	new_node->next = NULL;
-	if (*str_list == NULL)
+	if (last_node == NULL)
 		*str_list = new_node;
 	else
-	{
-		last_node = *str_list;
-		while (last_node->next)
-			last_node = last_node->next;
 		last_node->next = new_node;
-	}
+	new_node->str_buff = buff;
+	new_node->next = NULL;
+
 }
 
 void	copy_str(t_list *str_list, char *str)
@@ -80,7 +76,6 @@ void	create_str_list(t_list **str_list, int fd)
 		buff[bytes_read] = '\0';
 		add_to_str_list(str_list, buff);
 	}
-	free(buff);
 }
 
 char	*get_line(t_list *str_list)
@@ -110,7 +105,7 @@ char	*get_next_line(int fd)
 	clean_str_list(&str_list);
 	return (next_line);
 }
-
+/*
 int	main()
 {
 	int		fd = open("file.txt", O_RDONLY);
@@ -123,3 +118,4 @@ int	main()
 	}
 	return (0);
 }
+*/
